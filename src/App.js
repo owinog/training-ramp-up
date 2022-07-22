@@ -1,11 +1,9 @@
-import "./App.css";
+import '@progress/kendo-theme-default/dist/all.css';
+import './App.css';
+import DataTable from './components/dataTable';
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header"></header>
-        </div>
-    );
-}
+const App = () => {
+    return <DataTable />;
+};
 
 export default App;
