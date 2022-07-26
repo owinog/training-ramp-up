@@ -3,7 +3,14 @@ import './App.css';
 import DataTable from './components/dataTable';
 
 const App = () => {
-    return <DataTable />;
+    return (
+        <>
+            <div className='App-Header'>
+                <h1>Stooman</h1>
+            </div>
+            <DataTable />;
+        </>
+    );
 };
 
 export default App;
