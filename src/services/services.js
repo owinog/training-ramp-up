@@ -16,8 +16,14 @@ export const addStudent = (student) => {
     return data;
 };
 
-export const updateItem = (student) => {
+export const updateStudent = (student) => {
     let index = data.findIndex((record) => record.stuID === student.stuID);
     data[index] = student;
+    return data;
+};
+
+export const deleteStudent = (student) => {
+    let index = data.findIndex((record) => record.stuID === student.stuID);
+    data.splice(index, 1);
     return data;
 };

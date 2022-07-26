@@ -4,7 +4,12 @@ import {
     GridToolbar,
 } from '@progress/kendo-react-grid';
 import { useEffect, useState } from 'react';
-import { getStudents, addStudent, updateItem } from '../services/services';
+import {
+    getStudents,
+    addStudent,
+    updateStudent,
+    deleteStudent,
+} from '../services/services';
 import { ActionCell } from './actionCell';
 
 const DataTable = () => {
@@ -29,18 +34,8 @@ const DataTable = () => {
 
     const update = (dataItem) => {
         dataItem.inEdit = false;
-        const newData = updateItem(dataItem);
+        const newData = updateStudent(dataItem);
         setData(newData);
-    };
-
-    const enterEdit = (dataItem) => {
-        setData(
-            data.map((student) =>
-                student.stuID === dataItem.stuID
-                    ? { ...student, inEdit: true }
-                    : student
-            )
-        );
     };
 
     const cancel = (dataItem) => {
@@ -53,12 +48,8 @@ const DataTable = () => {
         setData(newData);
     };
 
-    const itemChange = (event) => {
-        const newData = data.map((item) =>
-            item.stuID === event.dataItem.stuID
-                ? { ...item, [event.field || '']: event.value }
-                : item
-        );
+    const remove = (dataItem) => {
+        const newData = [...deleteStudent(dataItem)];
         setData(newData);
     };
 
@@ -69,10 +60,30 @@ const DataTable = () => {
         setData([newDataItem, ...data]);
     };
 
+    const enterEdit = (dataItem) => {
+        setData(
+            data.map((student) =>
+                student.stuID === dataItem.stuID
+                    ? { ...student, inEdit: true }
+                    : student
+            )
+        );
+    };
+
+    const itemChange = (event) => {
+        const newData = data.map((item) =>
+            item.stuID === event.dataItem.stuID
+                ? { ...item, [event.field || '']: event.value }
+                : item
+        );
+        setData(newData);
+    };
+
     const funcCell = (props) => (
         <ActionCell
             {...props}
             add={add}
+            remove={remove}
             editField={'inEdit'}
             discard={discard}
             edit={enterEdit}

@@ -1,3 +1,6 @@
+const calcAge = (dob) =>
+    (Date.now() - dob.getTime()) / (1000 * 60 * 60 * 24 * 365);
+
 export const Students = [
     {
         stuID: 1,
@@ -5,7 +8,7 @@ export const Students = [
         address: 'Watson Lake',
         phone: '0478386175',
         dob: new Date(2000, 9, 23),
-        age: '',
+        age: undefined,
         gender: 'Female',
     },
     {
@@ -14,7 +17,7 @@ export const Students = [
         address: 'Lelystad',
         phone: '0546956463',
         dob: new Date(2000, 8, 15),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
     {
@@ -23,7 +26,7 @@ export const Students = [
         address: 'Reinbek',
         phone: '0326242264',
         dob: new Date(1998, 11, 11),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
     {
@@ -32,7 +35,7 @@ export const Students = [
         address: 'Goiânia',
         phone: '0973760989',
         dob: new Date(1997, 7, 3),
-        age: '',
+        age: undefined,
         gender: 'Female',
     },
     {
@@ -41,7 +44,7 @@ export const Students = [
         address: 'Cajazeiras',
         phone: '0452377030',
         dob: new Date(1997, 7, 12),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
     {
@@ -50,7 +53,7 @@ export const Students = [
         address: 'Darwin',
         phone: '0662648594',
         dob: new Date(1997, 1, 3),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
     {
@@ -59,7 +62,7 @@ export const Students = [
         address: 'Cañas',
         phone: '0653874683',
         dob: new Date(1997, 4, 3),
-        age: '',
+        age: undefined,
         gender: 'Female',
     },
     {
@@ -68,7 +71,7 @@ export const Students = [
         address: 'Shaanxi',
         phone: '0332128381',
         dob: new Date(2001, 5, 12),
-        age: '',
+        age: undefined,
         gender: 'Female',
     },
     {
@@ -77,7 +80,7 @@ export const Students = [
         address: 'Pontianak',
         phone: '0339832770',
         dob: new Date(1995, 8, 15),
-        age: '',
+        age: undefined,
         gender: 'Female',
     },
     {
@@ -86,7 +89,7 @@ export const Students = [
         address: 'Tauranga',
         phone: '0223063341',
         dob: new Date(2000, 3, 12),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
     {
@@ -95,7 +98,7 @@ export const Students = [
         address: 'Tual',
         phone: '0550495516',
         dob: new Date(1997, 4, 22),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
     {
@@ -104,7 +107,7 @@ export const Students = [
         address: 'Okigwe',
         phone: '0877854525',
         dob: new Date(2000, 2, 28),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
     {
@@ -113,7 +116,7 @@ export const Students = [
         address: 'Meycauayan',
         phone: '0339352156',
         dob: new Date(1996, 12, 12),
-        age: '',
+        age: undefined,
         gender: 'Female',
     },
     {
@@ -122,7 +125,7 @@ export const Students = [
         address: 'Dublin',
         phone: '0777893101',
         dob: new Date(1996, 6, 5),
-        age: '',
+        age: undefined,
         gender: 'Female',
     },
     {
@@ -131,7 +134,9 @@ export const Students = [
         address: 'Pinetown',
         phone: '0466877475',
         dob: new Date(1995, 11, 8),
-        age: '',
+        age: undefined,
         gender: 'Male',
     },
 ];
+
+// calcAge(new Date(1995, 11, 8))
