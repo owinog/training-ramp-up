@@ -4,26 +4,52 @@ import {
     GridToolbar,
 } from '@progress/kendo-react-grid';
 import { useEffect, useState } from 'react';
-import { getItems, insertItem } from '../services/services';
+import { getStudents, addStudent, updateItem } from '../services/services';
 import { ActionCell } from './actionCell';
 
 const DataTable = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        let newItems = getItems();
+        let newItems = getStudents();
         setData(newItems);
     }, []);
 
     const add = (dataItem) => {
         dataItem.inEdit = true;
-        const newData = insertItem(dataItem);
+        const newData = addStudent(dataItem);
         setData(newData);
     };
 
     const discard = () => {
         const newData = [...data];
         newData.splice(0, 1);
+        setData(newData);
+    };
+
+    const update = (dataItem) => {
+        dataItem.inEdit = false;
+        const newData = updateItem(dataItem);
+        setData(newData);
+    };
+
+    const enterEdit = (dataItem) => {
+        setData(
+            data.map((student) =>
+                student.stuID === dataItem.stuID
+                    ? { ...student, inEdit: true }
+                    : student
+            )
+        );
+    };
+
+    const cancel = (dataItem) => {
+        const originalItem = getStudents().find(
+            (p) => p.stuID === dataItem.stuID
+        );
+        const newData = data.map((item) =>
+            item.stuID === originalItem.stuID ? originalItem : item
+        );
         setData(newData);
     };
 
@@ -49,6 +75,9 @@ const DataTable = () => {
             add={add}
             editField={'inEdit'}
             discard={discard}
+            edit={enterEdit}
+            update={update}
+            cancel={cancel}
         />
     );
 
