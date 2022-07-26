@@ -6,7 +6,7 @@ const App = () => {
     return (
         <>
             <div className='App-Header'>
-                <h1>Stooman</h1>
+                <h1>LaMaey</h1>
             </div>
             <DataTable />;
         </>
