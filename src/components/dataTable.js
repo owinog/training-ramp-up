@@ -4,7 +4,7 @@ import {
     GridToolbar,
 } from '@progress/kendo-react-grid';
 import { useEffect, useState } from 'react';
-import { getItems } from '../services/services';
+import { getItems, insertItem } from '../services/services';
 import { ActionCell } from './actionCell';
 
 const DataTable = () => {
@@ -15,18 +15,56 @@ const DataTable = () => {
         setData(newItems);
     }, []);
 
-    const funcCell = () => <ActionCell />;
+    const add = (dataItem) => {
+        dataItem.inEdit = true;
+        const newData = insertItem(dataItem);
+        setData(newData);
+    };
+
+    const discard = () => {
+        const newData = [...data];
+        newData.splice(0, 1);
+        setData(newData);
+    };
+
+    const itemChange = (event) => {
+        const newData = data.map((item) =>
+            item.stuID === event.dataItem.stuID
+                ? { ...item, [event.field || '']: event.value }
+                : item
+        );
+        setData(newData);
+    };
+
+    const addNew = () => {
+        const newDataItem = {
+            inEdit: true,
+        };
+        setData([newDataItem, ...data]);
+    };
+
+    const funcCell = (props) => (
+        <ActionCell
+            {...props}
+            add={add}
+            editField={'inEdit'}
+            discard={discard}
+        />
+    );
 
     return (
         <Grid
             style={{
                 height: '80vh',
             }}
-            data={data}>
+            data={data}
+            onItemChange={itemChange}
+            editField={'inEdit'}>
             <GridToolbar>
                 <button
                     title='Add new'
-                    className='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>
+                    className='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'
+                    onClick={addNew}>
                     Add new
                 </button>
             </GridToolbar>
@@ -42,7 +80,7 @@ const DataTable = () => {
                 format='{0:d}'
             />
             <Column field='age' title='Age' editor='numeric' />
-            <Column cell={funcCell} width='150px' />
+            <Column cell={funcCell} width='200px' />
         </Grid>
     );
 };
