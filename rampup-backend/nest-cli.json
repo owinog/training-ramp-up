@@ -26,6 +26,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/student-crud/tsconfig.app.json"
       }
+    },
+    "student-actions": {
+      "type": "application",
+      "root": "apps/student-actions",
+      "entryFile": "main",
+      "sourceRoot": "apps/student-actions/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/student-actions/tsconfig.app.json"
+      }
     }
   }
 }
