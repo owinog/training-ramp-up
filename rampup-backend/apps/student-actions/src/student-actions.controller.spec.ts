@@ -11,7 +11,9 @@ describe('StudentActionsController', () => {
       providers: [StudentActionsService],
     }).compile();
 
-    studentActionsController = app.get<StudentActionsController>(StudentActionsController);
+    studentActionsController = app.get<StudentActionsController>(
+      StudentActionsController,
+    );
   });
 
   describe('root', () => {
