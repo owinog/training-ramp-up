@@ -3,15 +3,16 @@
 # ------------------------------------------------------
 
 type Student {
-  stuID: Int!
-  studentName: String
+  stuID: String!
+  studentName: String!
   gender: String
-  address: String
-  phone: String
+  address: String!
+  phone: String!
   dob: String
 }
 
 type Query {
+  getAllStudents: [Student!]!
   student(id: Int!): Student!
 }
 
