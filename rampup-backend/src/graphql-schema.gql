@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Student {
+  stuID: Int!
+  studentName: String
+  gender: String
+  address: String
+  phone: String
+  dob: String
+}
+
+type Query {
+  student(id: Int!): Student!
+}
+
+type Mutation {
+  createStudent(createStudentInput: CreateStudentInput!): Student!
+  updateStudent(updateStudentInput: UpdateStudentInput!): Student!
+  removeStudent(id: Int!): Student!
+}
+
+input CreateStudentInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateStudentInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}

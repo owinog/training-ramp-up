@@ -1,18 +1,18 @@
-import { Module } from '@nestjs/common';
-import { StudentActionsController } from './student-actions.controller';
-import { StudentActionsService } from './student-actions.service';
-import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { StudentsResolver } from './students/students.resolver';
+import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
+    StudentModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
+      autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
     }),
   ],
-  controllers: [StudentActionsController],
-  providers: [StudentActionsService, StudentsResolver],
+  controllers: [],
+  providers: [],
 })
 export class StudentActionsModule {}
