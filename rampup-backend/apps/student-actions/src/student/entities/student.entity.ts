@@ -1,30 +1,39 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @ObjectType()
 @Entity()
 export class Student {
   @Field()
   @PrimaryGeneratedColumn('uuid')
-  stuID: String;
+  id: String;
 
   @Field()
   @Column()
-  studentName?: string;
+  studentName: string;
+
+  @Field()
+  @Column()
+  gender: string;
+
+  @Field()
+  @Column()
+  address: string;
+
+  @Field()
+  @Column()
+  phone: string;
+
+  @Field()
+  @Column()
+  dob: string;
 
   @Field({ nullable: true })
-  @Column({ nullable: true })
-  gender?: string;
-
-  @Field()
-  @Column()
-  address?: string;
-
-  @Field()
-  @Column()
-  phone?: string;
-
-  @Field({ nullable: true })
-  @Column({ nullable: true })
-  dob?: string;
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

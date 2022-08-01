@@ -14,8 +14,13 @@ import { useQuery, gql } from "@apollo/client";
 import { ActionCell } from "./actionCell";
 
 const FETCH_STUDENTS = gql`
-    {
-        getStudent
+    query {
+        getAllStudents {
+            id
+            studentName
+            address
+            phone
+        }
     }
 `;
 

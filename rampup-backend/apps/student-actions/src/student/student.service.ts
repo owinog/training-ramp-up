@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateStudentInput } from './dto/create-student.input';
@@ -10,29 +10,31 @@ export class StudentService {
   constructor(
     @InjectRepository(Student) private studentRepository: Repository<Student>,
   ) {}
-  create(createStudentInput: CreateStudentInput) {
-    return 'This action adds a new student';
+
+  async create(createStudentInput: CreateStudentInput): Promise<Student> {
+    let stud = this.studentRepository.create(createStudentInput);
+    return await this.studentRepository.save(stud);
   }
 
   async findAll(): Promise<Student[]> {
-    // return this.studentRepository.find();
-    let stu: Student = new Student();
-    stu.stuID = '123123';
-    stu.studentName = 'owin';
-    stu.address = 'negombo';
-    stu.phone = '0123123123';
-    return [stu];
+    return await this.studentRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} student`;
+  async findOne(id: string): Promise<Student> {
+    return await this.studentRepository.findOneBy({ id });
   }
 
-  update(id: number, updateStudentInput: UpdateStudentInput) {
-    return `This action updates a #${id} student`;
+  async update(id: string, updateStudentInput: UpdateStudentInput) {
+    let stud: Student = this.studentRepository.create(updateStudentInput);
+    stud.id = id;
+    return await this.studentRepository.save(stud);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} student`;
+  async remove(id: string) {
+    const res = await this.studentRepository.softDelete(id);
+    if (!res.affected) {
+      throw new NotFoundException(`No record with id ${id}`);
+    }
+    return res;
   }
 }

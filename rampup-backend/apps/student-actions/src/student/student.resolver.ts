@@ -6,9 +6,9 @@ import { UpdateStudentInput } from './dto/update-student.input';
 
 @Resolver(() => Student)
 export class StudentResolver {
-  constructor(private readonly studentService: StudentService) {}
+  constructor(private studentService: StudentService) {}
 
-  @Mutation(() => Student)
+  @Mutation(() => Student, { name: 'createStudent' })
   createStudent(
     @Args('createStudentInput') createStudentInput: CreateStudentInput,
   ) {
@@ -20,8 +20,8 @@ export class StudentResolver {
     return this.studentService.findAll();
   }
 
-  @Query(() => Student, { name: 'student' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Student, { name: 'findStudent' })
+  findOne(@Args('id') id: string) {
     return this.studentService.findOne(id);
   }
 
@@ -36,7 +36,7 @@ export class StudentResolver {
   }
 
   @Mutation(() => Student)
-  removeStudent(@Args('id', { type: () => Int }) id: number) {
+  removeStudent(@Args('id', { type: () => String }) id: string) {
     return this.studentService.remove(id);
   }
 }
