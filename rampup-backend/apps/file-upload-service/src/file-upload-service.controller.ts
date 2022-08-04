@@ -1,7 +1,5 @@
 import {
-  Body,
   Controller,
-  Get,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -16,20 +14,12 @@ export class FileUploadServiceController {
     private readonly fileUploadServiceService: FileUploadServiceService,
   ) {}
 
-  @Get()
-  getHello(): string {
-    return this.fileUploadServiceService.getHello();
-  }
-
-  @UseInterceptors(
-    FileInterceptor('file', { dest: './apps/file-upload-service/src/uploads' }),
-  )
   @Post('file')
+  @UseInterceptors(FileInterceptor('file', { dest: './uploads' }))
   uploadFile(
-    @Body() body: string,
     @UploadedFile()
     file: Express.Multer.File,
   ) {
-    return { body, file: file.buffer.toString() };
+    return { file };
   }
 }
