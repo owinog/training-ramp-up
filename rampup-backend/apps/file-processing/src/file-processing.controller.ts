@@ -1,12 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
-import { FileProcessingService } from './file-processing.service';
-
+import { Controller, Get, Query } from '@nestjs/common';
+import { StudentListProducerService } from './student-list/student-list.producer.service';
 @Controller()
 export class FileProcessingController {
-  constructor(private readonly fileProcessingService: FileProcessingService) {}
-
-  @Get()
-  getHello(): string {
-    return this.fileProcessingService.getHello();
-  }
+  constructor(
+    private readonly studentListProducer: StudentListProducerService,
+  ) {}
 }

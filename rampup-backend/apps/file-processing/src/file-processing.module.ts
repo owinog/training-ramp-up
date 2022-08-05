@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { FileProcessingController } from './file-processing.controller';
-import { FileProcessingService } from './file-processing.service';
 import { BullModule } from '@nestjs/bull';
-import { StudentListModule } from './student-list/student-list.module';
+import { StudentListProducerService } from './student-list/student-list.producer.service';
 
 @Module({
   imports: [
@@ -12,9 +11,11 @@ import { StudentListModule } from './student-list/student-list.module';
         port: 6379,
       },
     }),
-    StudentListModule,
+    BullModule.registerQueue({
+      name: 'fileQueue',
+    }),
   ],
   controllers: [FileProcessingController],
-  providers: [FileProcessingService],
+  providers: [StudentListProducerService],
 })
 export class FileProcessingModule {}
