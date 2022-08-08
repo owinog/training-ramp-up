@@ -1,9 +1,8 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { Student } from './student/student.entity';
 import { FileProcessingConsumer } from './file-processing.consumer';
+import { Student } from './student/student.entity';
 
 @Module({
   imports: [

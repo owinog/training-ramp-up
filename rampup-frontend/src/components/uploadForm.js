@@ -14,9 +14,8 @@ const UploadForm = () => {
             method: "POST",
             body: formData,
         })
-            .then((response) => response.json())
             .then((result) => {
-                console.log("Success:", result);
+                console.log("Success:", result.statusText, result.status);
             })
             .catch((error) => {
                 console.error("Error:", error);
