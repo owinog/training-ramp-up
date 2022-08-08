@@ -32,6 +32,6 @@ export class FileUploadServiceController {
     }),
   )
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    await this.queue.add('file-process-job', file.filename);
+    await this.queue.add('process-job', file.filename);
   }
 }
