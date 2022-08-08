@@ -12,6 +12,7 @@ import {
 } from "../services/services";
 import { useQuery, gql } from "@apollo/client";
 import { ActionCell } from "./actionCell";
+import { io } from "socket.io-client";
 
 const FETCH_STUDENTS = gql`
     query {
@@ -27,6 +28,7 @@ const FETCH_STUDENTS = gql`
 const DataTable = () => {
     const { data, loading, error } = useQuery(FETCH_STUDENTS);
     const [datau, setData] = useState([]);
+    const socket = io("http://localhost:5600");
 
     useEffect(() => {
         let newItems = getStudents();
@@ -37,6 +39,7 @@ const DataTable = () => {
         dataItem.inEdit = true;
         const newData = addStudent(dataItem);
         setData(newData);
+        socket?.emit("add", "Added student");
     };
 
     const discard = () => {
@@ -49,6 +52,7 @@ const DataTable = () => {
         dataItem.inEdit = false;
         const newData = updateStudent(dataItem);
         setData(newData);
+        socket?.emit("update", "Updated student details");
     };
 
     const cancel = (dataItem) => {
@@ -64,6 +68,7 @@ const DataTable = () => {
     const remove = (dataItem) => {
         const newData = [...deleteStudent(dataItem)];
         setData(newData);
+        socket?.emit("remove", "Removed student");
     };
 
     const addNew = () => {
@@ -115,13 +120,15 @@ const DataTable = () => {
             }}
             data={datau}
             onItemChange={itemChange}
-            editField={"inEdit"}>
+            editField={"inEdit"}
+        >
             {console.log(data)}
             <GridToolbar>
                 <button
                     title="Add new"
                     className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"
-                    onClick={addNew}>
+                    onClick={addNew}
+                >
                     Add new
                 </button>
             </GridToolbar>
