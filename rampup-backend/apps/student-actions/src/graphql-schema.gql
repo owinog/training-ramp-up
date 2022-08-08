@@ -9,6 +9,7 @@ type Student {
   address: String!
   phone: String!
   dob: String!
+  age: Float!
   deletedAt: DateTime
 }
 

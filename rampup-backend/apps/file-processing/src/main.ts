@@ -3,6 +3,6 @@ import { FileProcessingModule } from './file-processing.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(FileProcessingModule);
-  await app.listen(5002);
+  await app.listen(5500);
 }
 bootstrap();

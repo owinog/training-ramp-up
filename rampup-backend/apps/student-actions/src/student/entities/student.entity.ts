@@ -11,7 +11,7 @@ import {
 export class Student {
   @Field()
   @PrimaryGeneratedColumn('uuid')
-  id: String;
+  id: string;
 
   @Field()
   @Column()
@@ -32,6 +32,10 @@ export class Student {
   @Field()
   @Column()
   dob: string;
+
+  @Field()
+  @Column({ nullable: true })
+  age: number;
 
   @Field({ nullable: true })
   @DeleteDateColumn()
