@@ -1,3 +1,4 @@
+import { InjectQueue } from '@nestjs/bull';
 import {
   Controller,
   Post,
@@ -5,16 +6,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { FileUploadServiceService } from './file-upload-service.service';
-import { Express } from 'express';
+import { Queue } from 'bull';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
 @Controller()
 export class FileUploadServiceController {
-  constructor(
-    private readonly fileUploadServiceService: FileUploadServiceService,
-  ) {}
+  constructor(@InjectQueue('file-queue') private queue: Queue) {}
 
   @Post('file')
   @UseInterceptors(
@@ -33,10 +31,7 @@ export class FileUploadServiceController {
       }),
     }),
   )
-  uploadFile(
-    @UploadedFile()
-    file: Express.Multer.File,
-  ) {
-    return file;
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    await this.queue.add('file-process-job', file.filename);
   }
 }
