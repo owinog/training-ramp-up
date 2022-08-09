@@ -10,7 +10,7 @@ const UploadForm = () => {
     const submitHandler = () => {
         const formData = new FormData();
         formData.append("file", selectedFile);
-        fetch("http://localhost:5001/file", {
+        fetch("http://localhost:5400/file", {
             method: "POST",
             body: formData,
         })

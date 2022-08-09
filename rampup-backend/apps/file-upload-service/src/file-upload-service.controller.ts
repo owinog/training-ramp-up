@@ -10,6 +10,12 @@ import { Queue } from 'bull';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
+const formatFilename = (req, file, callback) => {
+  const name = file.originalname.split('.')[0];
+  const fileExtName = extname(file.originalname);
+  const timeNo = (Date.now() / 100).toString().substring(3).split('.')[0];
+  callback(null, name + timeNo + fileExtName);
+};
 @Controller()
 export class FileUploadServiceController {
   constructor(@InjectQueue('file-queue') private queue: Queue) {}
@@ -19,15 +25,7 @@ export class FileUploadServiceController {
     FileInterceptor('file', {
       storage: diskStorage({
         destination: './uploads',
-        filename: (req, file, callback) => {
-          const name = file.originalname.split('.')[0];
-          const fileExtName = extname(file.originalname);
-          const timeNo = (Date.now() / 100)
-            .toString()
-            .substring(3)
-            .split('.')[0];
-          callback(null, name + timeNo + fileExtName);
-        },
+        filename: formatFilename,
       }),
     }),
   )

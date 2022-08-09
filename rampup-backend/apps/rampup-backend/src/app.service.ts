@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class fileUploadService {
+export class AppService {
   getHello(): string {
-    return 'This is the file upload service app';
+    return 'This is the root app';
   }
 }
