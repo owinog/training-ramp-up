@@ -3,6 +3,7 @@ import { NotificationsModule } from './notifications.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(NotificationsModule);
+  app.enableCors();
   await app.listen(5300);
 }
 bootstrap();

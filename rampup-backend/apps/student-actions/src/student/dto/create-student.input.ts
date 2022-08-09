@@ -1,4 +1,4 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
 export class CreateStudentInput {
@@ -16,4 +16,7 @@ export class CreateStudentInput {
 
   @Field()
   dob: string;
+
+  @Field((type) => Int)
+  age: number;
 }

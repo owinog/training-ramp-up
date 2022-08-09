@@ -43,7 +43,7 @@ export class FileProcessingConsumer {
       this.studentRepository.create(student);
       await this.studentRepository.save(student);
 
-      Logger.log(i + 1 + ' - added ' + student.studentName);
+      Logger.log('added ' + student.studentName);
     }
   }
 

@@ -20,4 +20,7 @@ export class UpdateStudentInput extends PartialType(CreateStudentInput) {
 
   @Field()
   dob: string;
+
+  @Field((type) => Int)
+  age: number;
 }

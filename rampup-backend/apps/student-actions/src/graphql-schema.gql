@@ -35,6 +35,7 @@ input CreateStudentInput {
   address: String!
   phone: String!
   dob: String!
+  age: Int!
 }
 
 input UpdateStudentInput {
@@ -43,5 +44,6 @@ input UpdateStudentInput {
   address: String!
   phone: String!
   dob: String!
+  age: Int!
   id: String!
 }
