@@ -1,5 +1,5 @@
+import { Field, InputType, Int, PartialType } from '@nestjs/graphql';
 import { CreateStudentInput } from './create-student.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateStudentInput extends PartialType(CreateStudentInput) {
@@ -19,7 +19,7 @@ export class UpdateStudentInput extends PartialType(CreateStudentInput) {
   phone: string;
 
   @Field()
-  dob: string;
+  dob: Date;
 
   @Field((type) => Int)
   age: number;

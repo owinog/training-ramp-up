@@ -1,8 +1,8 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { StudentService } from './student.service';
-import { Student } from './entities/student.entity';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateStudentInput } from './dto/create-student.input';
 import { UpdateStudentInput } from './dto/update-student.input';
+import { Student } from './entities/student.entity';
+import { StudentService } from './student.service';
 
 @Resolver(() => Student)
 export class StudentResolver {

@@ -31,7 +31,7 @@ export class FileProcessingConsumer {
 
     for (let i = 0; i < rows.length; i++) {
       const student: Student = {
-        id: undefined,
+        id: rows[i]?.id,
         studentName: rows[i].StudentName,
         gender: rows[i].gender,
         address: rows[i].address,

@@ -8,8 +8,8 @@ type Student {
   gender: String!
   address: String!
   phone: String!
-  dob: String!
-  age: Float!
+  dob: DateTime!
+  age: Int!
   deletedAt: DateTime
 }
 
@@ -34,7 +34,7 @@ input CreateStudentInput {
   gender: String!
   address: String!
   phone: String!
-  dob: String!
+  dob: DateTime!
   age: Int!
 }
 
@@ -43,7 +43,7 @@ input UpdateStudentInput {
   gender: String!
   address: String!
   phone: String!
-  dob: String!
+  dob: DateTime!
   age: Int!
   id: String!
 }

@@ -15,7 +15,7 @@ export class CreateStudentInput {
   phone: string;
 
   @Field()
-  dob: string;
+  dob: Date;
 
   @Field((type) => Int)
   age: number;
