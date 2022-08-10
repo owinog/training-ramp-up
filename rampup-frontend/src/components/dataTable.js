@@ -4,13 +4,7 @@ import {
     GridToolbar,
 } from "@progress/kendo-react-grid";
 import { useEffect, useState } from "react";
-import {
-    getStudents,
-    addStudent,
-    updateStudent,
-    deleteStudent,
-} from "../services/services";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { ActionCell } from "./actionCell";
 import { io } from "socket.io-client";
 
@@ -89,6 +83,7 @@ const REMOVE_STUDENT = gql`
 `;
 
 const DataTable = () => {
+    const socket = io("http://localhost:5350");
     const [dataArr, setDataArr] = useState([]);
 
     //fetchAll Query
@@ -111,7 +106,11 @@ const DataTable = () => {
     }, [data]);
 
     const add = async (dataItem) => {
+        const action = "add";
+        const message = "Added student";
+
         dataItem.inEdit = true;
+
         await createStudentMutation({
             variables: {
                 studentName: dataItem.studentName,
@@ -122,6 +121,8 @@ const DataTable = () => {
                 phone: dataItem.phone,
             },
         });
+        socket?.emit(action, message);
+        socket?.on(action, (data) => console.log(data));
         refetch();
     };
 
@@ -132,6 +133,8 @@ const DataTable = () => {
     };
 
     const update = async (dataItem) => {
+        const action = "update";
+        const message = "Updated Student Details";
         let index = dataArr.findIndex((record) => record.id === dataItem.id);
         dataItem = dataArr[index];
 
@@ -147,6 +150,10 @@ const DataTable = () => {
             },
         });
         dataItem.inEdit = false;
+
+        socket?.emit(action, message);
+        socket?.on(action, (data) => console.log(data));
+
         refetch();
     };
 
@@ -162,7 +169,14 @@ const DataTable = () => {
     };
 
     const remove = async (dataItem) => {
+        const action = "remove";
+        const message = "Removed student";
+
         await removeStudentMutation({ variables: { id: dataItem.id } });
+
+        socket?.emit(action, message);
+        socket?.on(action, (data) => console.log(data));
+
         refetch();
     };
 
