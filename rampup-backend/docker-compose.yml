@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  student-actions:
+    image: student-actions-app
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  file-upload-service:
+    image: file-upload-app
+    ports:
+      - 5400:5400
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  file-processing:
+    image: file-processing-app
+    ports:
+      - 5500:5500
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  notifications:
+    image: notifications-app
+    ports:
+      - 5300:5300
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules

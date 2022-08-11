@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  rampupbackend:
+    image: rampupbackend
+    build:
+      context: rampup-backend
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 5000:5000
+      - 5300:5300
+      - 5400:5400
+      - 5500:5500
+      - 9229:9229
+    command: ["node", "--inspect=0.0.0.0:9229", "index.js"]
