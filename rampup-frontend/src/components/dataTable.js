@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import { ActionCell } from "./actionCell";
 import { io } from "socket.io-client";
+import DobCell from "./dobCell";
 
 const FETCH_STUDENTS = gql`
     query {
@@ -250,8 +251,9 @@ const DataTable = () => {
                 <Column
                     field="dob"
                     title="Date of Birth"
-                    editor="date"
-                    format="{0:d}"
+                    cell={DobCell}
+                    // editor="date"
+                    // format="{0:d}"
                 />
                 <Column
                     field="age"
