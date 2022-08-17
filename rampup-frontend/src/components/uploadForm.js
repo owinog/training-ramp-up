@@ -22,7 +22,7 @@ const UploadForm = () => {
             });
     };
     return (
-        <>
+        <div className="uploadForm">
             <span>Import Students : </span>
             <input
                 type="file"
@@ -43,7 +43,7 @@ const UploadForm = () => {
                 <p>Select a file to show details</p>
             )}
             <button onClick={submitHandler}>Submit</button>
-        </>
+        </div>
     );
 };
 
